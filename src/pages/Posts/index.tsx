@@ -1,3 +1,3 @@
 export function Posts() {
-  return <h1>Posts</h1>
+  return <div></div>
 }
