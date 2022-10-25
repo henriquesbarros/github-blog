@@ -3,19 +3,22 @@ import styled from 'styled-components'
 export const ProfileContainer = styled.div`
   display: flex;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 2.5rem;
   margin-top: -5.5rem;
   border-radius: 10px;
+  box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
   background: ${(props) => props.theme.colors['base-profile']};
 
   figure img {
     height: 9.25rem;
     width: 9.25rem;
     border-radius: 10px;
+    object-fit: cover;
   }
 `
 
 export const ProfileSummary = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
 `
@@ -51,7 +54,7 @@ export const ProfileSummaryHeader = styled.div`
 `
 
 export const ProfileSummaryMain = styled.div`
-  margin: 0.5rem 0 1.5rem;
+  margin-top: 0.5rem;
 
   p {
     font-size: ${(props) => props.theme['font-sizes'].s};
@@ -65,6 +68,7 @@ export const ProfileSummaryMain = styled.div`
 export const ProfileSummaryFooter = styled.div`
   display: flex;
   gap: 1.5rem;
+  margin-top: auto;
 
   div {
     display: flex;

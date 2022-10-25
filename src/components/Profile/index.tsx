@@ -5,7 +5,8 @@ import {
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { api } from '../../lib/axios'
 import {
   ProfileContainer,
   ProfileSummary,
@@ -14,39 +15,59 @@ import {
   ProfileSummaryMain,
 } from './styles'
 
+interface ProfileData {
+  login: string
+  bio: string
+  avatar_url: string
+  html_url: string
+  name: string
+  company?: string
+  followers: number
+}
+
+const USER_NAME = 'henriquesbarros'
+
 export function Profile() {
+  const [user, setUser] = useState<ProfileData>({} as ProfileData)
+
+  async function getUser() {
+    const { data } = await api.get(`users/${USER_NAME}`)
+
+    setUser(data)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
   return (
     <ProfileContainer>
       <figure>
-        <img src="https://github.com/henriquesbarros.png" alt="" />
+        <img src={`${user.avatar_url}`} alt="" />
       </figure>
       <ProfileSummary>
         <ProfileSummaryHeader>
-          <h1>Henrique Barros</h1>
-          <NavLink to="#">
+          <h1>{user.name}</h1>
+          <a href={user.html_url} target="_blank" rel="noreferrer">
             <span>GITHUB</span>
             <FontAwesomeIcon icon={faUpRightFromSquare} />
-          </NavLink>
+          </a>
         </ProfileSummaryHeader>
         <ProfileSummaryMain>
-          <p>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </p>
+          <p>{user.bio}</p>
         </ProfileSummaryMain>
         <ProfileSummaryFooter>
           <div>
             <FontAwesomeIcon icon={faGithub} />
-            <span>henriquesbarros</span>
+            <span>{user.login}</span>
           </div>
           <div>
             <FontAwesomeIcon icon={faBuilding} />
-            <span>Compass.UOL</span>
+            <span>{user.company}</span>
           </div>
           <div>
             <FontAwesomeIcon icon={faUserGroup} />
-            <span>{`${32} seguidores`}</span>
+            <span>{`${user.followers} seguidor(es)`}</span>
           </div>
         </ProfileSummaryFooter>
       </ProfileSummary>
