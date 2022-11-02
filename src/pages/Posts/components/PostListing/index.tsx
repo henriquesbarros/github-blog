@@ -1,15 +1,17 @@
+import { IPost } from '../..'
 import { Post } from './components/Post'
 import { PostListingContainer } from './styles'
 
-export function PostListing() {
+interface PostListingProps {
+  posts: IPost[]
+}
+
+export function PostListing({ posts }: PostListingProps) {
   return (
     <PostListingContainer>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <Post key={post.number} post={post} />
+      ))}
     </PostListingContainer>
   )
 }

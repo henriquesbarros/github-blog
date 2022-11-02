@@ -1,24 +1,21 @@
+import { IPost } from '../..'
+import { relativeDateFormmater } from '../../../../../../utils/formatter'
 import { PostContainer } from './styles'
 
-export function Post() {
+interface PostProps {
+  post: IPost
+}
+
+export function Post({ post }: PostProps) {
+  const formattedDate = relativeDateFormmater(post.created_at)
+
   return (
-    <PostContainer to="#">
+    <PostContainer to={`/post/${post.number}`}>
       <div>
-        <strong>JavaScript data types and data structures</strong>
-        <span>Há 1 dia</span>
+        <strong>{post.title}</strong>
+        <span>{formattedDate}</span>
       </div>
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures. Wherever
-        possible, comparisons with other languages are drawn. Dynamic typing
-        JavaScript is a loosely typed and dynamic language. Variables in
-        JavaScript are not directly associated with any particular value type,
-        and any variable can be assigned (and re-assigned) values of all types:
-        let foo = 42; // foo is now a number foo = bar; // foo is now a string
-        foo = true; // foo is now a boolean
-      </p>
+      <p>{post.body}</p>
     </PostContainer>
   )
 }
