@@ -1,4 +1,4 @@
-import { IPost } from '../..'
+import { IPost } from '../../../..'
 import { relativeDateFormmater } from '../../../../../../utils/formatter'
 import { PostContainer } from './styles'
 
