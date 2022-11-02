@@ -36,7 +36,7 @@ export function Post() {
   return (
     <PostContainer>
       <PostInfo post={post} isLoading={isLoading} />
-      <PostContent />
+      {!isLoading && <PostContent content={post?.body} />}
     </PostContainer>
   )
 }
